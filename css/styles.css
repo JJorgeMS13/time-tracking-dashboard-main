@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,500&display=swap');
+
+:root {
+    /* Colors Primary */
+    --Blue: hsl(246, 80%, 60%);
+    --Light-red: hsl(15, 100%, 70%); /* (work) */
+    --Soft-blue: hsl(195, 74%, 62%); /* (play) */
+    --Light-red: hsl(348, 100%, 68%); /* (study) */
+    --Lime-green: hsl(145, 58%, 55%); /* (exercise) */
+    --Violet: hsl(264, 64%, 52%); /* (social) */
+    --Soft-orange: hsl(43, 84%, 65%); /* (self care) */
+
+    /* Colors Neutral */
+    --Very-dark-blue: hsl(226, 43%, 10%);
+    --Dark-blue: hsl(235, 46%, 20%);
+    --Desaturated-blue: hsl(235, 45%, 61%);
+    --Pale-Blue: hsl(236, 100%, 87%);
+    font-size: 62.5%;
+}
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color: #0E1323;
+    font-family: "Rubik", sans-serif;
+}
+.container__cards {
+    display: grid;
+}
+.card__user {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    background-color: #1C204B;
+    margin: 8rem 2.4rem 0 2.4rem;
+    border-radius: 1.5rem;
+    height: 20.3rem;
+    min-width: 25.5rem;
+    max-width: 37.5rem;
+}
+.card__user header {
+    display: flex;
+    align-items: center;
+    grid-column: 1 /-1;
+    grid-row: 1 / 3;
+    background-color: #5747EA;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    height: 13.3rem;
+}
+.card__user button {
+    font-size: 1.8rem;
+    background-color: transparent;
+    border: none;
+    color: #7078C9;
+}
+.card__user button:hover {
+    cursor: pointer;
+}
+.btn_active {
+    color: white !important;
+}
+.card__user_header {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+.card__user_header img {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    height: 6.4rem;
+    width: 6.4rem;
+    border: .3rem solid #D8D8D8;
+    border-radius: 50%;
+}
+.card__user_header span {
+    grid-column: 2 / -1;
+    grid-row: 1;
+    font-size: 1.5rem;
+    color: #BBC0FF;
+}
+.card__user_header p {
+    grid-column: 2 / -1;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: white;
+}
+/* ------- Tarjetas de las actividades --------- */
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-items: stretch;
+    align-items: end;
+    margin: 2.4rem 2.4rem 0 2.4rem;
+    border-radius: 1.5rem;
+    height: 16rem;
+    min-width: 25.5rem;
+    max-width: 37.5rem;
+}
+.work {
+    background-color: #FF8B64 ;
+    background-image: url(../images/icon-work.svg);
+    background-repeat: no-repeat;
+    background-position: 93% -14%;
+}
+.play {
+    background-color: #55C2E6 ;
+    background-image: url(../images/icon-play.svg);
+    background-repeat: no-repeat;
+    background-position: 93% -14%;
+}
+.study {
+    background-color: #FF5E7D ;
+    background-image: url(../images/icon-study.svg);
+    background-repeat: no-repeat;
+    background-position: 93% -14%;
+}
+.exercise {
+    background-color: #4BCF82 ;
+    background-image: url(../images/icon-exercise.svg);
+    background-repeat: no-repeat;
+    background-position: 93% 0%;
+}
+.social {
+    background-color: #7335D2 ;
+    background-image: url(../images/icon-social.svg);
+    background-repeat: no-repeat;
+    background-position: 93% -20%;
+}
+.self_care {
+    background-color: #F1C75B ;
+    background-image: url(../images/icon-self-care.svg);
+    background-repeat: no-repeat;
+    background-position: 96% -14%;
+}
+.card__info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    align-items: center;
+    background-color: #1C204B;
+    border-radius: 1rem;
+    height: 12.2rem;
+    width: 100%;
+    padding: 2.6rem;
+}
+.card__info:hover {
+    cursor: pointer;
+    background-color: #33397A;
+}
+.card__info h3 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: white;
+}
+.card__info h2 {
+    font-size: 3.2rem;
+    font-weight: 300;
+    color: white;
+}
+.card__info img {
+    justify-self: end;
+}
+.card__info p {
+    text-align: right;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #BBC0FF;
+}
+/* ---Footer--- */
+.attribution { font-size: 1.4rem; text-align: center; color: white;}
+.attribution a { color: hsl(228, 70%, 84%); }
+/* ----------(>768) ---------*/
+@media screen and (min-width: 48rem) {
+    .container__cards {
+        justify-content: center;
+    }
+}
+/* ----------(>1024) ---------*/
+@media screen and (min-width: 64rem) {
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+        gap: 3rem;
+    }
+    .container__cards {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        justify-content: center;
+        align-items: center;
+    }
+    .card__user {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        height: 51.8rem;
+        grid-column: 1;
+        grid-row: 1 / -1;
+        margin: 0;
+    }
+    .card__user header {
+        width: 100%;
+        height: 35.4rem;
+    }
+    .card__user_header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: flex-start;
+    }
+    .card__user_header img {
+        height: 7.8rem;
+        width: 7.8rem;
+        margin-bottom: 3rem;
+    }
+    .card__user_header p {
+        margin-top: .3rem;
+        font-size: 4rem;
+    }
+    .card__user button {
+        margin-left: 3rem;
+        margin-top: 2.4rem;
+    }
+    .social {
+        grid-column: 2 /3;
+        grid-row: 3 / -1;      
+    }
+    .self_care {
+        grid-column: 3 /-1;
+        grid-row: 3 / -1;
+    }
+}
+
+/* ----------(>1024) ---------*/
+@media screen and (min-width: 90rem) {
+    body {
+        align-items: center;
+    }
+    .container__cards {
+        max-width: 64rem;
+        gap: 3rem;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+
+    }
+    .card {
+        margin: 0;
+        height: 24.4rem;
+    }
+    .card__info {
+        height: 19.9rem;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+    .card__info h3 {
+        grid-column: 1 / 3;
+    }
+    .card__info h2 {
+        font-size: 5.3rem;
+        grid-column: 1 / 3;
+    }
+    .card__info p {
+        text-align: start;
+        grid-row: 3 / -1;
+        grid-column: 1 / 3;
+    }
+    .social {
+        grid-column: 3 /4;
+        grid-row: 2 / -1;      
+    }
+    .self_care {
+        grid-column: 4 /-1;
+        grid-row: 2 / -1;
+    }
+}
