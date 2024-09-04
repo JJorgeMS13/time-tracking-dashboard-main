@@ -34,6 +34,7 @@ function construirCards(plantilla, timeframes, clase) {
         h3.textContent = plantilla;
         h2.textContent = `${timeframes.current} hrs`;
         img.src = './images/icon-ellipsis.svg';
+        img.alt = 'Imagen de icono para las tarjetas';
         p.textContent = `Last Daily - ${timeframes.previous} hrs`;
         divInfo.classList.add('card__info');
         divInfo.appendChild(h3);
