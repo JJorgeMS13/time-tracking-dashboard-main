@@ -16,6 +16,7 @@ async function getData() {
     });
 }
 function construirCards(plantilla, timeframes, clase) {
+    
     const articulos = document.querySelectorAll('article');
 
     if (articulos.length < 7) {
@@ -85,7 +86,6 @@ function btnContructor(btn) {
             datos.forEach(element => {        
                 if (element.title === 'Work') {
                     construirCards('Work', element.timeframes.weekly, 'work');
-                    return
                 }
                 if (element.title === 'Play') {
                     construirCards('Play', element.timeframes.weekly, 'play');
@@ -108,10 +108,9 @@ function btnContructor(btn) {
     }
     if (btn === 'Monthly') {        
         getData().then((datos) => {        
-            datos.forEach(element => {        
-                if (element.title === 'Monthly') {
+            datos.forEach(element => {  
+                if (element.title === 'Work') {
                     construirCards('Work', element.timeframes.monthly, 'work');
-                    return
                 }
                 if (element.title === 'Play') {
                     construirCards('Play', element.timeframes.monthly, 'play');
@@ -159,15 +158,19 @@ function activarBtn(btn) {
 btnDaily.classList.toggle('btn_active');
 btnContructor('Daily');
 
-btnDaily.addEventListener('click',() => {
-    activarBtn('Daily');
-    btnContructor('Daily');
-});
-btnWeekly.addEventListener('click',() => {
-    activarBtn('Weekly');
-    btnContructor('Weekly');
-});
-btnMonthly.addEventListener('click',() => {
-    activarBtn('Monthly');
-    btnContructor('Monthly');
-});
+
+const handleClick = (e) => {
+    if (e.target.id === 'btn_daily') {
+        activarBtn('Daily');
+        btnContructor('Daily');
+    } else if (e.target.id === 'btn_weekly') {
+        activarBtn('Weekly');
+        btnContructor('Weekly');
+    } else if(e.target.id === 'btn_monthly') {
+        activarBtn('Monthly');
+        btnContructor('Monthly');
+    }
+}
+btnDaily.addEventListener('click', handleClick);
+btnWeekly.addEventListener('click', handleClick);
+btnMonthly.addEventListener('click', handleClick);
