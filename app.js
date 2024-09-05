@@ -6,7 +6,6 @@ const btnMonthly = document.getElementById('btn_monthly');
 async function getData() {
    return fetch('./data.json').then((request) => {
         if (!request.ok) {
-            console.log('Fallo');
             throw new Error(`Error en la solicitud: ${request.status}`);
         }
         return request.json();
@@ -15,18 +14,32 @@ async function getData() {
         return null;
     });
 }
+function createElement() {
+    const elementArticle = document.createElement('article');
+    const divInfo = document.createElement('div');
+    const h3 = document.createElement('h3');
+    const img = document.createElement('img');
+    const h2 = document.createElement('h2');
+    const p = document.createElement('p');
+
+    const elementos = {
+        elementArticle: elementArticle,
+        divInfo: divInfo,
+        h3: h3,
+        img: img,
+        h2: h2,
+        p: p
+    }
+
+    return elementos;
+}
 function construirCards(plantilla, timeframes, clase) {
     
     const articulos = document.querySelectorAll('article');
 
     if (articulos.length < 7) {
-        const elementArticle = document.createElement('article');
-        const divInfo = document.createElement('div');
-        const h3 = document.createElement('h3');
-        const img = document.createElement('img');
-        const h2 = document.createElement('h2');
-        const p = document.createElement('p');
-
+        const { elementArticle, divInfo, h3, img, h2, p }  = createElement();
+        
         /* agregar id */
         h2.id = `${clase}__h2`;
         p.id = `${clase}__p`;
@@ -56,102 +69,48 @@ function construirCards(plantilla, timeframes, clase) {
 }
 
 function btnContructor(btn) {
-    if (btn === 'Daily') {
-        getData().then((datos) => {        
-            datos.forEach(element => {        
-                if (element.title === 'Work') {
-                    construirCards('Work', element.timeframes.daily, 'work');
-                }
-                if (element.title === 'Play') {
-                    construirCards('Play', element.timeframes.daily, 'play');
-                }
-                if (element.title === 'Study') {
-                    construirCards('Study', element.timeframes.daily, 'study');
-                }
-                if (element.title === 'Exercise') {
-                    construirCards('Exercise', element.timeframes.daily, 'exercise');
-                }
-                if (element.title === 'Social') {
-                    construirCards('Social', element.timeframes.daily, 'social');
-                }
-                if (element.title === 'Self Care') {
-                    construirCards('Self Care', element.timeframes.daily, 'self_care');
-                }
-                
-            });
+    //Objeto con los periodos que tenemos disponible en nuestro Fetch
+    const periodos = {
+        'Daily': 'daily',
+        'Weekly': 'weekly',
+        'Monthly': 'monthly'
+    };
+
+    const periodo = periodos[btn];
+
+    getData().then((datos) => {
+        datos.forEach(element => {
+            const { title, timeframes } = element;
+            
+            const actividades = {
+                'Work': 'work',
+                'Play': 'play',
+                'Study': 'study',
+                'Exercise': 'exercise',
+                'Social': 'social',
+                'Self Care': 'self_care'
+            };
+
+            if (actividades[title]) {
+                construirCards(title, timeframes[periodo], actividades[title])
+            }
+            
         });
-    }
-    if (btn === 'Weekly') {        
-        getData().then((datos) => {        
-            datos.forEach(element => {        
-                if (element.title === 'Work') {
-                    construirCards('Work', element.timeframes.weekly, 'work');
-                }
-                if (element.title === 'Play') {
-                    construirCards('Play', element.timeframes.weekly, 'play');
-                }
-                if (element.title === 'Study') {
-                    construirCards('Study', element.timeframes.weekly, 'study');
-                }
-                if (element.title === 'Exercise') {
-                    construirCards('Exercise', element.timeframes.weekly, 'exercise');
-                }
-                if (element.title === 'Social') {
-                    construirCards('Social', element.timeframes.weekly, 'social');
-                }
-                if (element.title === 'Self Care') {
-                    construirCards('Self Care', element.timeframes.weekly, 'self_care');
-                }
-                
-            });
-        });
-    }
-    if (btn === 'Monthly') {        
-        getData().then((datos) => {        
-            datos.forEach(element => {  
-                if (element.title === 'Work') {
-                    construirCards('Work', element.timeframes.monthly, 'work');
-                }
-                if (element.title === 'Play') {
-                    construirCards('Play', element.timeframes.monthly, 'play');
-                }
-                if (element.title === 'Study') {
-                    construirCards('Study', element.timeframes.monthly, 'study');
-                }
-                if (element.title === 'Exercise') {
-                    construirCards('Exercise', element.timeframes.monthly, 'exercise');
-                }
-                if (element.title === 'Social') {
-                    construirCards('Social', element.timeframes.monthly, 'social');
-                }
-                if (element.title === 'Self Care') {
-                    construirCards('Self Care', element.timeframes.monthly, 'self_care');
-                }
-                
-            });
-        });
-    }   
+    });
 }
 function activarBtn(btn) {
-    switch (btn) {
-        case 'Daily':
-            btnDaily.classList.add('btn_active');
-            btnWeekly.classList.remove('btn_active');
-            btnMonthly.classList.remove('btn_active');
-            break;
-        case 'Weekly':
-            btnWeekly.classList.add('btn_active');
-            btnDaily.classList.remove('btn_active');
-            btnMonthly.classList.remove('btn_active');
-            break;          
-        case 'Monthly':
-            btnWeekly.classList.remove('btn_active');
-            btnDaily.classList.remove('btn_active');
-            btnMonthly.classList.add('btn_active');
-            break;    
-        default:
-            btnDaily.classList.toggle('btn_active');
-            break;
+    //Lista de botones del DOM
+    const botones = {
+        'Daily': btnDaily,
+        'Weekly': btnWeekly,
+        'Monthly': btnMonthly
+    };
+    //Limpiamos los botones si es que tienen la clase activada.
+    Object.values(botones).forEach( boton => boton.classList.remove('btn_active'));
+    //Verificamos si nuestro boton existe.
+    if (botones[btn]) {
+        //activamos el boton que se le dio click.
+        botones[btn].classList.add('btn_active');
     }
 }
 
@@ -160,17 +119,26 @@ btnContructor('Daily');
 
 
 const handleClick = (e) => {
-    if (e.target.id === 'btn_daily') {
-        activarBtn('Daily');
-        btnContructor('Daily');
-    } else if (e.target.id === 'btn_weekly') {
-        activarBtn('Weekly');
-        btnContructor('Weekly');
-    } else if(e.target.id === 'btn_monthly') {
-        activarBtn('Monthly');
-        btnContructor('Monthly');
+    //Se mapea el id del boton con el valor a pasar para obtenes los datos
+    const mapeoBotones = {
+        'btn_daily': 'Daily',
+        'btn_weekly': 'Weekly',
+        'btn_monthly': 'Monthly'
+    };
+
+    //Obtengo el id del boton clikeado.
+    const key = e.target.id;
+    //Obtengo su valor para ejecutar la funcion con ese parametro
+    const valor = mapeoBotones[key];
+
+    if (mapeoBotones[key]) {
+        //Activo el boton clickeado
+        activarBtn(valor);
+        // Obtengo los valores para agregarselos a mi Dom
+        btnContructor(valor);
     }
 }
+
 btnDaily.addEventListener('click', handleClick);
 btnWeekly.addEventListener('click', handleClick);
 btnMonthly.addEventListener('click', handleClick);
